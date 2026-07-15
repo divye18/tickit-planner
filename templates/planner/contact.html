@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Contact - TickIt Planner{% endblock %}
+
+{% block content %}
+<div class="container my-5 animate-slide-up">
+    <!-- Header -->
+    <div class="text-center mb-5 pb-3 border-bottom">
+        <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-2 fw-bold tracking-wide">CONNECT</span>
+        <h1 class="display-4 fw-extrabold text-dark">Get In Touch</h1>
+        <p class="lead text-muted col-lg-6 mx-auto">Have questions or feedback about TickIt Planner? Let us know!</p>
+    </div>
+    
+    <div class="row g-5 justify-content-center">
+        <!-- Developer Profile Card (Left) -->
+        <div class="col-lg-5">
+            <div class="card card-premium p-4 text-center bg-white h-100 shadow-sm">
+                <div class="fs-1 text-primary mb-3"><i class="bi bi-person-circle"></i></div>
+                <h3 class="fw-extrabold text-dark mb-1">Divye Bajaj</h3>
+                <p class="text-gradient-primary fw-bold mb-3">Developer & Creator of TickIt Planner</p>
+                <div class="text-start border-top pt-3 small text-secondary">
+                    <h6 class="fw-bold text-dark mb-2">About Me</h6>
+                    <p class="mb-3">
+                        I am a B.Tech candidate in Electronics & Computer Engineering (ECM) at Jaypee Institute of Information Technology (JIIT), Noida. I specialize in Django architectures and responsive UX structures.
+                    </p>
+                    <h6 class="fw-bold text-dark mb-2">Let's Connect</h6>
+                    <div class="d-flex flex-column gap-2 mt-2">
+                        <a href="https://github.com" target="_blank" class="btn btn-outline-dark w-100 text-start py-2.5 px-3 rounded-3 fs-7">
+                            <i class="bi bi-github me-2"></i> github.com/divye-bajaj
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" class="btn btn-outline-primary w-100 text-start py-2.5 px-3 rounded-3 fs-7">
+                            <i class="bi bi-linkedin me-2"></i> linkedin.com/in/divye-bajaj
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form Card (Right) -->
+        <div class="col-lg-6">
+            <div class="card card-premium p-4 bg-white h-100">
+                <h3 class="fw-bold mb-4 border-bottom pb-2"><i class="bi bi-envelope-paper-fill text-primary me-2"></i>Send a Message</h3>
+                <form onsubmit="event.preventDefault(); alert('Thank you for your message! This form is set up as a prototype.'); this.reset();">
+                    <div class="mb-3">
+                        <label for="nameInput" class="form-label fw-semibold text-secondary small">Your Name</label>
+                        <input type="text" class="form-control" id="nameInput" placeholder="John Doe" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailInput" class="form-label fw-semibold text-secondary small">Email Address</label>
+                        <input type="email" class="form-control" id="emailInput" placeholder="name@example.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="messageInput" class="form-label fw-semibold text-secondary small">Message</label>
+                        <textarea class="form-control" id="messageInput" rows="4" placeholder="Write your feedback or questions here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 py-2.5 fw-bold mt-2 text-white">
+                        <i class="bi bi-send-fill me-1.5"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

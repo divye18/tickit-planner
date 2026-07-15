@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+
+{% block title %}Home - TickIt Planner{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<header class="hero-bg py-5 text-white position-relative">
+    <div class="container py-5 animate-slide-up">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <span class="badge bg-primary px-3 py-2 rounded-pill mb-3 fw-bold tracking-wide">⚡ INTRODUCING TICKIT V2.0</span>
+                <h1 class="display-3 fw-extrabold mb-4 lh-sm">
+                    Manage Tasks.<br>
+                    Organize Events.<br>
+                    <span class="text-gradient-primary">Stay Ahead.</span>
+                </h1>
+                <p class="lead mb-4 text-white-50 fs-5">
+                    Transitioning your favorite command-line task organizer into a beautiful, high-performance web workspace. Plan your daily schedule, track priorities, and get things done.
+                </p>
+                <div class="d-flex gap-3 flex-wrap">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'planner:dashboard' %}" class="btn btn-primary btn-lg px-4 py-3 rounded-3 shadow fw-semibold text-white">
+                            <i class="bi bi-grid-1x2-fill me-2"></i> Enter Workspace
+                        </a>
+                    {% else %}
+                        <a href="{% url 'planner:register' %}" class="btn btn-primary btn-lg px-4 py-3 rounded-3 shadow fw-semibold text-white">
+                            <i class="bi bi-person-plus-fill me-2"></i> Get Started
+                        </a>
+                        <a href="{% url 'planner:login' %}" class="btn btn-outline-light btn-lg px-4 py-3 rounded-3 fw-semibold">
+                            <i class="bi bi-box-arrow-in-right me-2"></i> Login
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block text-center">
+                <!-- Interactive Mockup UI -->
+                <div class="card max-width-card border-0 shadow rounded-3 mx-auto overflow-hidden">
+                    <div class="card-header bg-dark border-0 d-flex justify-content-between align-items-center py-3 px-4">
+                        <div class="d-flex gap-1.5">
+                            <span class="dot bg-danger"></span>
+                            <span class="dot bg-warning"></span>
+                            <span class="dot bg-success"></span>
+                        </div>
+                        <span class="text-white-50 small font-monospace">divye@tickit:~/workspace</span>
+                    </div>
+                    <div class="terminal-body text-start font-monospace text-light p-4 small">
+                        <p class="mb-1 text-secondary">$ python ticket.py --summary</p>
+                        <p class="mb-3 text-info">--- TICKIT PLANNER PREVIEW ---</p>
+                        <p class="mb-1 text-warning">Pending Tasks (3):</p>
+                        <p class="mb-1 text-white">&nbsp;&nbsp;[ ] 1. Write Django Views (HIGH) - Due Tomorrow</p>
+                        <p class="mb-1 text-white">&nbsp;&nbsp;[ ] 2. Update CSS styles (MEDIUM) - Due Today</p>
+                        <p class="mb-3 text-white">&nbsp;&nbsp;[ ] 3. Deploy to Staging (LOW) - Due Friday</p>
+                        <p class="mb-1 text-success">Upcoming Events (1):</p>
+                        <p class="mb-3 text-white">&nbsp;&nbsp;* 2026-07-15 10:00 - Review Meeting @ Room A</p>
+                        <p class="mb-0 text-success">Productivity: 75% Complete &nbsp;&nbsp;[████████████░░░░]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Trusted Technologies Section -->
+<section class="py-5 bg-white border-bottom">
+    <div class="container text-center animate-fade-in">
+        <h6 class="text-uppercase text-muted fw-bold tracking-wider mb-4">Built with Modern Developer Technologies</h6>
+        <div class="row g-4 justify-content-center">
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="tech-icon-card">
+                    <div class="fs-1 text-primary mb-2"><i class="bi bi-box-seam-fill"></i></div>
+                    <span class="fw-bold text-dark">Django 5</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="tech-icon-card">
+                    <div class="fs-1 text-info mb-2"><i class="bi bi-bootstrap-fill"></i></div>
+                    <span class="fw-bold text-dark">Bootstrap 5</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="tech-icon-card">
+                    <div class="fs-1 text-warning mb-2"><i class="bi bi-code-square"></i></div>
+                    <span class="fw-bold text-dark">Python</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="tech-icon-card">
+                    <div class="fs-1 text-dark mb-2"><i class="bi bi-database-fill"></i></div>
+                    <span class="fw-bold text-dark">SQLite</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Grid Section -->
+<section class="py-5 bg-light">
+    <div class="container py-4">
+        <div class="text-center mb-5">
+            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill fw-bold mb-2">POWERFUL CORE</span>
+            <h2 class="fw-extrabold text-dark">Maximize Your Daily Efficiency</h2>
+            <p class="text-muted col-lg-6 mx-auto">Everything you need to plan your tasks, manage events, and organize your calendar schedule.</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Feature 1 -->
+            <div class="col-md-4">
+                <div class="card card-premium p-4 h-100 text-center hover-lift">
+                    <div class="fs-1 text-primary mb-3"><i class="bi bi-clipboard-check-fill"></i></div>
+                    <h4 class="fw-bold mb-3">Task Management</h4>
+                    <p class="text-muted small mb-0">Create tasks, assign due dates, set high/medium/low priorities, and check them off your workspace dynamically.</p>
+                </div>
+            </div>
+            <!-- Feature 2 -->
+            <div class="col-md-4">
+                <div class="card card-premium p-4 h-100 text-center hover-lift">
+                    <div class="fs-1 text-warning mb-3"><i class="bi bi-calendar-week-fill"></i></div>
+                    <h4 class="fw-bold mb-3">Calendar Schedules</h4>
+                    <p class="text-muted small mb-0">Schedule activities, log specific durations, track locations, and never miss an upcoming meeting or appointment.</p>
+                </div>
+            </div>
+            <!-- Feature 3 -->
+            <div class="col-md-4">
+                <div class="card card-premium p-4 h-100 text-center hover-lift">
+                    <div class="fs-1 text-success mb-3"><i class="bi bi-graph-up-arrow"></i></div>
+                    <h4 class="fw-bold mb-3">Productivity Overview</h4>
+                    <p class="text-muted small mb-0">Track complete ratio status using real-time database queries and watch live task progress updates.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Section -->
+<section class="py-5 bg-white">
+    <div class="container py-4">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill fw-bold mb-2">PRODUCTIVITY VALUES</span>
+                <h2 class="fw-extrabold text-dark mb-4">Why Choose TickIt Planner?</h2>
+                <div class="d-flex flex-column gap-3">
+                    <div class="d-flex gap-3">
+                        <div class="fs-4 text-primary"><i class="bi bi-lightning-charge-fill"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Blazing Fast Interface</h5>
+                            <p class="text-muted small mb-0">Fast response times, clean page layouts, and instant checkmark updates.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-3">
+                        <div class="fs-4 text-primary"><i class="bi bi-shield-lock-fill"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Data Ownership Security</h5>
+                            <p class="text-muted small mb-0">Your tasks are securely connected to your user account, guarded from unauthorized access.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-3">
+                        <div class="fs-4 text-primary"><i class="bi bi-phone-fill"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Fully Responsive Layout</h5>
+                            <p class="text-muted small mb-0">Seamless experience across mobile viewports, tablets, and wide screens.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <div class="card card-premium p-4 glass-premium">
+                    <div class="fs-1 text-warning mb-2"><i class="bi bi-chat-quote-fill"></i></div>
+                    <blockquote class="blockquote font-italic">
+                        <p class="mb-3 text-dark fw-semibold">"Productivity is never an accident. It is always the result of a commitment to excellence, intelligent planning, and focused effort."</p>
+                        <footer class="blockquote-footer text-muted small">Paul J. Meyer</footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="py-5 bg-light">
+    <div class="container py-4 text-center">
+        <div class="mb-5">
+            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill fw-bold mb-2">SIMPLE STEPS</span>
+            <h2 class="fw-extrabold text-dark">Get Started in 3 Simple Steps</h2>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="p-3">
+                    <div class="badge bg-primary rounded-circle mb-3 d-inline-flex align-items-center justify-content-center" style="width: 48px; height: 48px; font-size: 1.25rem;">1</div>
+                    <h5 class="fw-bold">Register Account</h5>
+                    <p class="text-muted small">Create a free personal account to start logging tasks and calendar schedules securely.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3">
+                    <div class="badge bg-primary rounded-circle mb-3 d-inline-flex align-items-center justify-content-center" style="width: 48px; height: 48px; font-size: 1.25rem;">2</div>
+                    <h5 class="fw-bold">Log Tasks & Events</h5>
+                    <p class="text-muted small">Fill in task due dates and priorities, and schedule events with specific locations and clock durations.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3">
+                    <div class="badge bg-primary rounded-circle mb-3 d-inline-flex align-items-center justify-content-center" style="width: 48px; height: 48px; font-size: 1.25rem;">3</div>
+                    <h5 class="fw-bold">Conquer Your Day</h5>
+                    <p class="text-muted small">Watch your dashboard metrics update, complete active task blocks, and track your efficiency.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5 bg-white">
+    <div class="container py-4">
+        <div class="text-center mb-5">
+            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill fw-bold mb-2">FAQ</span>
+            <h2 class="fw-extrabold text-dark">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-8">
+                <div class="d-flex flex-column gap-3">
+                    <div class="faq-card p-4">
+                        <h5 class="fw-bold text-dark mb-2"><i class="bi bi-question-circle text-primary me-2"></i>Is TickIt Planner free to use?</h5>
+                        <p class="text-muted small mb-0">Yes! The web version is fully open source and free for personal schedule logging.</p>
+                    </div>
+                    <div class="faq-card p-4">
+                        <h5 class="fw-bold text-dark mb-2"><i class="bi bi-question-circle text-primary me-2"></i>Is my data private and secure?</h5>
+                        <p class="text-muted small mb-0">Absolutely. Django's built-in authentication layer ensures that only you can view, add, or delete your items.</p>
+                    </div>
+                    <div class="faq-card p-4">
+                        <h5 class="fw-bold text-dark mb-2"><i class="bi bi-question-circle text-primary me-2"></i>Can I use TickIt Planner on my phone?</h5>
+                        <p class="text-muted small mb-0">Yes, the layout is fully responsive and optimized for clean viewports on mobile devices.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="py-5 bg-dark text-white text-center">
+    <div class="container py-5 animate-fade-in">
+        <h2 class="display-5 fw-extrabold mb-3 text-gradient-primary">Take Control of Your Schedule Today</h2>
+        <p class="lead mb-4 text-white-50 col-lg-6 mx-auto">Join TickIt Planner to track your tasks, log your events, and experience simple productivity.</p>
+        <div>
+            {% if user.is_authenticated %}
+                <a href="{% url 'planner:dashboard' %}" class="btn btn-primary btn-lg px-4 py-3 rounded-3 fw-bold text-white">
+                    <i class="bi bi-grid-1x2-fill me-2"></i> Go to Dashboard
+                </a>
+            {% else %}
+                <a href="{% url 'planner:register' %}" class="btn btn-primary btn-lg px-5 py-3 rounded-3 fw-bold text-white shadow-lg">
+                    <i class="bi bi-person-plus-fill me-2"></i> Create Free Account
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

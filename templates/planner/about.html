@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}About - TickIt Planner{% endblock %}
+
+{% block content %}
+<div class="container my-5 animate-slide-up">
+    <!-- Header -->
+    <div class="text-center mb-5 pb-3 border-bottom">
+        <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-2 fw-bold tracking-wide">PROJECT STORY</span>
+        <h1 class="display-4 fw-extrabold text-dark">About TickIt Planner</h1>
+        <p class="lead text-muted col-lg-6 mx-auto">From a local terminal CLI utility to a premium web productivity workspace.</p>
+    </div>
+
+    <!-- Split Pane: Vision & Details -->
+    <div class="row g-5 mb-5 align-items-center">
+        <div class="col-lg-6">
+            <h3 class="fw-extrabold text-dark mb-3"><i class="bi bi-rocket-takeoff-fill text-primary me-2"></i>Our Project Vision</h3>
+            <p class="text-muted">
+                TickIt Planner started as a simple Python command-line utility to help developers track their daily objectives, schedule events, and maintain focus directly from the terminal.
+            </p>
+            <p class="text-muted mb-4">
+                As our user base grew, we recognized the need for a visual interface that preserves the simplicity and speed of the command line but introduces the accessibility of the web. This Django-powered web app is the result of that vision.
+            </p>
+            
+            <div class="card card-premium bg-primary-subtle text-primary p-4 mb-0">
+                <h5 class="fw-bold mb-2"><i class="bi bi-bullseye me-2"></i>The Goal</h5>
+                <p class="mb-0 text-secondary small">
+                    To deliver a lightweight, secure, and beautiful task organization platform that helps you maximize your daily productivity without getting bogged down by complicated features.
+                </p>
+            </div>
+        </div>
+        
+        <div class="col-lg-6">
+            <div class="card card-premium p-4 bg-white">
+                <h4 class="fw-bold mb-4 border-bottom pb-2">Core Principles</h4>
+                <ul class="list-unstyled d-flex flex-column gap-3 mb-0">
+                    <li class="d-flex align-items-start gap-3">
+                        <span class="fs-5 text-primary"><i class="bi bi-check-circle-fill"></i></span>
+                        <div>
+                            <h6 class="fw-bold mb-1 text-dark">Simplicity First</h6>
+                            <p class="text-muted small mb-0">We focus on what matters most: logging tasks and getting them checked off.</p>
+                        </div>
+                    </li>
+                    <li class="d-flex align-items-start gap-3">
+                        <span class="fs-5 text-success"><i class="bi bi-check-circle-fill"></i></span>
+                        <div>
+                            <h6 class="fw-bold mb-1 text-dark">Best-in-Class Structure</h6>
+                            <p class="text-muted small mb-0">Constructed on clean, standard Django patterns, facilitating future scaling and API integration.</p>
+                        </div>
+                    </li>
+                    <li class="d-flex align-items-start gap-3">
+                        <span class="fs-5 text-warning"><i class="bi bi-check-circle-fill"></i></span>
+                        <div>
+                            <h6 class="fw-bold mb-1 text-dark">Accessibility</h6>
+                            <p class="text-muted small mb-0">No installations required. Access your list from anywhere in the world with a browser.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Meet The Developer Section -->
+    <div class="row mb-5 justify-content-center">
+        <div class="col-lg-8">
+            <div class="card card-premium p-5 text-center bg-white shadow-sm border border-light">
+                <div class="fs-1 text-primary mb-3"><i class="bi bi-person-badge-fill"></i></div>
+                <h3 class="fw-extrabold text-dark mb-1">Meet the Developer</h3>
+                <h5 class="text-gradient-primary fw-bold mb-2">Divye Bajaj</h5>
+                <p class="text-muted small mb-2 col-md-10 mx-auto">
+                    🎓 <strong>B.Tech Candidate</strong> &middot; Electronics & Computer Engineering (ECM)
+                </p>
+                <p class="text-muted small mb-3 col-md-10 mx-auto">
+                    🏫 <strong>Jaypee Institute of Information Technology (JIIT)</strong>, Noida
+                </p>
+                <p class="text-secondary small mb-4 col-md-10 mx-auto">
+                    Passionate about Python programming, Django web frameworks, Artificial Intelligence architectures, and crafting responsive productivity workspaces.
+                </p>
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="https://github.com" target="_blank" class="btn btn-outline-dark px-3 py-2 fs-7 rounded-3">
+                        <i class="bi bi-github me-1.5"></i> GitHub
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="btn btn-outline-primary px-3 py-2 fs-7 rounded-3">
+                        <i class="bi bi-linkedin me-1.5"></i> LinkedIn
+                    </a>
+                    <a href="#" class="btn btn-outline-secondary px-3 py-2 fs-7 rounded-3" onclick="alert('Portfolio site is coming soon!'); event.preventDefault();">
+                        <i class="bi bi-briefcase me-1.5"></i> Portfolio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Future Roadmap Section -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-premium p-4">
+                <h3 class="fw-extrabold text-dark mb-4 border-bottom pb-2">
+                    <i class="bi bi-compass-fill text-primary me-2"></i>Future Roadmap
+                </h3>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="timeline-card mb-3">
+                            <div class="timeline-dot"></div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="fw-bold mb-0 text-dark">📅 Calendar Grid View</h6>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill small" style="font-size: 0.65rem;">COMING SOON</span>
+                            </div>
+                            <p class="text-muted small mb-0">Visualize scheduled events and active tasks in a fully interactive, drag-and-drop calendar matrix.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="timeline-card mb-3">
+                            <div class="timeline-dot"></div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="fw-bold mb-0 text-dark">🌙 Dark Theme Mode</h6>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill small" style="font-size: 0.65rem;">COMING SOON</span>
+                            </div>
+                            <p class="text-muted small mb-0">Provide complete color palette controls enabling users to toggle between light and dark modes.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="timeline-card mb-3">
+                            <div class="timeline-dot"></div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="fw-bold mb-0 text-dark">🤖 AI Productivity Assistant</h6>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill small" style="font-size: 0.65rem;">COMING SOON</span>
+                            </div>
+                            <p class="text-muted small mb-0">Smart scheduling suggestions, automated task priority ranking, and daily efficiency summaries.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="timeline-card mb-3">
+                            <div class="timeline-dot"></div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="fw-bold mb-0 text-dark">📊 Analytics Dashboard</h6>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill small" style="font-size: 0.65rem;">COMING SOON</span>
+                            </div>
+                            <p class="text-muted small mb-0">Interactive metric charts mapping weekly completion progress and timeline milestones.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="timeline-card mb-3">
+                            <div class="timeline-dot"></div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="fw-bold mb-0 text-dark">☁ Cloud Sync Data</h6>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill small" style="font-size: 0.65rem;">COMING SOON</span>
+                            </div>
+                            <p class="text-muted small mb-0">Synchronize schedules seamlessly across different user devices with real-time updates.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="timeline-card mb-3">
+                            <div class="timeline-dot"></div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="fw-bold mb-0 text-dark">📤 Data Export Features</h6>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill small" style="font-size: 0.65rem;">COMING SOON</span>
+                            </div>
+                            <p class="text-muted small mb-0">Download registered tasks and schedule logs as standard CSV or PDF summaries.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

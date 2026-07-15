@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - TickIt Planner{% endblock %}
+
+{% block content %}
+<div class="container animate-fade-in">
+    <!-- Header Block (Greeting & Custom Quote) -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="p-5 text-white rounded-4 shadow-sm border border-0 position-relative overflow-hidden" style="background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;">
+                <div class="position-relative z-index-1">
+                    <span class="badge bg-white text-primary px-3 py-2 rounded-pill mb-3 fw-bold tracking-wide">
+                        <i class="bi bi-person-workspace me-1"></i> WORKSPACE ACTIVE
+                    </span>
+                    <h1 class="display-5 fw-extrabold mb-2">Good Evening, {{ user.username|capfirst }} 👋</h1>
+                    <p class="lead text-white-50 mb-3 fw-semibold">
+                        <i class="bi bi-calendar3 me-2"></i>{% now "l, d F Y" %}
+                    </p>
+                    <hr class="border-white border-opacity-25 my-3">
+                    <p class="mb-0 text-white-50 font-italic small fw-medium">
+                        <i class="bi bi-chat-quote-fill me-1 text-warning"></i> "Stay productive. Every task completed is one step closer to your goals."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats & Cards Row -->
+    <div class="row g-4 mb-4">
+        <!-- Pending Task Card -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card card-premium border-priority-high p-4 h-100 shadow-sm hover-lift">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted small fw-bold text-uppercase tracking-wider">Pending Tasks</span>
+                    <span class="badge bg-danger-subtle text-danger p-2 rounded-3"><i class="bi bi-clock-history fs-5"></i></span>
+                </div>
+                <div class="fw-extrabold text-dark mb-2" style="font-size: 3.2rem; line-height: 1;">{{ pending_tasks_count }}</div>
+                <div class="small text-muted d-flex align-items-center gap-1">
+                    <i class="bi bi-exclamation-circle-fill text-danger"></i> Action needed
+                </div>
+            </div>
+        </div>
+        <!-- Completed Card -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card card-premium border-priority-low p-4 h-100 shadow-sm hover-lift">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted small fw-bold text-uppercase tracking-wider">Completed Tasks</span>
+                    <span class="badge bg-success-subtle text-success p-2 rounded-3"><i class="bi bi-check-circle-fill fs-5"></i></span>
+                </div>
+                <div class="fw-extrabold text-dark mb-2" style="font-size: 3.2rem; line-height: 1;">{{ completed_tasks_count }}</div>
+                <div class="small text-muted d-flex align-items-center gap-1">
+                    <i class="bi bi-trophy-fill text-warning"></i> Keep it up
+                </div>
+            </div>
+        </div>
+        <!-- Upcoming Card -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card card-premium border-priority-medium p-4 h-100 shadow-sm hover-lift">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted small fw-bold text-uppercase tracking-wider">Upcoming Events</span>
+                    <span class="badge bg-warning-subtle text-warning p-2 rounded-3"><i class="bi bi-calendar2-week fs-5"></i></span>
+                </div>
+                <div class="fw-extrabold text-dark mb-2" style="font-size: 3.2rem; line-height: 1;">{{ upcoming_events_count }}</div>
+                <div class="small text-muted d-flex align-items-center gap-1">
+                    <i class="bi bi-alarm-fill text-warning"></i> Next scheduled
+                </div>
+            </div>
+        </div>
+        <!-- Total Card -->
+        <div class="col-md-6 col-lg-3">
+            <div class="card card-premium p-4 h-100 shadow-sm hover-lift" style="border-left: 6px solid var(--color-primary) !important;">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted small fw-bold text-uppercase tracking-wider">Total Events</span>
+                    <span class="badge bg-primary-subtle text-primary p-2 rounded-3"><i class="bi bi-calendar3-event fs-5"></i></span>
+                </div>
+                <div class="fw-extrabold text-dark mb-2" style="font-size: 3.2rem; line-height: 1;">{{ total_events_count }}</div>
+                <div class="small text-muted d-flex align-items-center gap-1">
+                    <i class="bi bi-lightning-fill text-primary"></i> Cumulative events
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Productivity Progress card -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card card-premium p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0 text-dark">
+                        <i class="bi bi-trophy-fill text-warning me-2"></i>Daily Completion Rate
+                    </h5>
+                    <span class="badge bg-success-subtle text-success px-3 py-1.5 rounded-pill border border-success-subtle fw-bold">
+                        {{ completion_percentage }}% Complete
+                    </span>
+                </div>
+                <div class="progress-container-custom">
+                    <div class="progress-bar-custom" style="width: {{ completion_percentage }}%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Workspace Split Pane Layout -->
+    <div class="row g-4">
+        <!-- Left Pane: Tasks (Linear Issue Tracker style) -->
+        <div class="col-lg-8">
+            <div class="card card-premium p-4 h-100 bg-white">
+                <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+                    <h4 class="fw-extrabold mb-0 text-dark">
+                        <i class="bi bi-check2-square text-primary me-2"></i>Active Tasks
+                    </h4>
+                    <a href="{% url 'planner:tasks_list' %}" class="btn btn-sm btn-outline-secondary py-1 px-3 fs-7 rounded-3">
+                        Manage Tasks
+                    </a>
+                </div>
+
+                {% if not recent_tasks %}
+                    <div class="text-center py-5">
+                        <div class="fs-1 mb-3">🎉</div>
+                        <h5 class="fw-bold text-dark">You're all caught up!</h5>
+                        <p class="text-muted small">No pending tasks for today. Start by creating a new task.</p>
+                        <a href="{% url 'planner:task_add' %}" class="btn btn-sm btn-primary text-white mt-2 px-3 py-2 rounded-3 fw-bold">
+                            <i class="bi bi-plus-lg me-1"></i> Add Task
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="d-flex flex-column gap-2">
+                        {% for task in recent_tasks %}
+                            <div class="d-flex align-items-center justify-content-between p-3 border border-secondary border-opacity-10 rounded-3 hover-lift bg-light-subtle shadow-xs">
+                                <div class="d-flex align-items-center gap-3 w-75">
+                                    <form method="POST" action="{% url 'planner:task_complete' %}" class="mb-0">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="task_id" value="{{ task.id }}">
+                                        <button type="submit" class="btn btn-outline-success btn-sm rounded-circle d-flex align-items-center justify-content-center p-0" style="width: 28px; height: 28px;" title="Mark Task Complete">
+                                            <i class="bi bi-check" style="font-size: 1.25rem;"></i>
+                                        </button>
+                                    </form>
+                                    <div class="text-truncate">
+                                        <h6 class="fw-bold mb-1 text-truncate text-dark">{{ task.title }}</h6>
+                                        <span class="text-muted small d-flex align-items-center gap-1">
+                                            <i class="bi bi-calendar3"></i> Due: {{ task.due_date }}
+                                        </span>
+                                    </div>
+                                </div>
+                                <span class="badge {% if task.priority == 'HIGH' %}bg-danger-subtle text-danger border-danger-subtle{% elif task.priority == 'LOW' %}bg-success-subtle text-success border-success-subtle{% else %}bg-warning-subtle text-warning border-warning-subtle{% endif %} border px-2.5 py-1.5 rounded-pill small">
+                                    <span class="d-inline-block me-1 rounded-circle" style="width: 6px; height: 6px; background-color: currentColor; vertical-align: middle;"></span>
+                                    {{ task.priority }}
+                                </span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Right Pane: Upcoming Events & Quick Actions -->
+        <div class="col-lg-4">
+            <div class="d-flex flex-column gap-4 h-100">
+                <!-- Events Block (Agenda style) -->
+                <div class="card card-premium p-4 flex-grow-1 bg-white">
+                    <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+                        <h4 class="fw-extrabold mb-0 text-dark">
+                            <i class="bi bi-calendar2-week text-warning me-2"></i>Agenda
+                        </h4>
+                        <a href="{% url 'planner:events_list' %}" class="btn btn-sm btn-outline-secondary py-1 px-3 fs-7 rounded-3">
+                            All Events
+                        </a>
+                    </div>
+
+                    {% if not recent_events %}
+                        <div class="text-center py-5">
+                            <div class="fs-1 mb-2 text-muted"><i class="bi bi-calendar-x"></i></div>
+                            <p class="text-muted small">No upcoming events scheduled.</p>
+                            <a href="{% url 'planner:event_add' %}" class="btn btn-sm btn-outline-secondary mt-2 px-3 py-2 rounded-3">
+                                Schedule
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="d-flex flex-column gap-3">
+                            {% for event in recent_events %}
+                                <div class="p-3 border border-secondary border-opacity-10 rounded-3 hover-lift bg-light-subtle shadow-xs">
+                                    <h6 class="fw-bold text-primary mb-2">{{ event.title }}</h6>
+                                    <div class="small text-muted d-flex align-items-center gap-1.5 mb-1">
+                                        <i class="bi bi-clock-fill text-secondary"></i> {{ event.date }} &middot; {{ event.start_time }}
+                                    </div>
+                                    <div class="small text-muted d-flex align-items-center gap-1.5">
+                                        <i class="bi bi-geo-alt-fill text-danger"></i> {{ event.location }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Quick Actions Block -->
+                <div class="card card-premium p-4 bg-white">
+                    <h5 class="fw-bold mb-3 border-bottom pb-2 text-dark">⚡ Quick Actions</h5>
+                    <div class="d-flex flex-column gap-2">
+                        <a href="{% url 'planner:task_add' %}" class="btn btn-primary text-white py-2.5 rounded-3 text-start px-3 d-flex align-items-center justify-content-between">
+                            <span><i class="bi bi-plus-circle-fill me-2"></i> ➕ New Task</span>
+                            <i class="bi bi-chevron-right small opacity-50"></i>
+                        </a>
+                        <a href="{% url 'planner:event_add' %}" class="btn btn-outline-secondary py-2.5 rounded-3 text-start px-3 d-flex align-items-center justify-content-between">
+                            <span><i class="bi bi-calendar-plus-fill me-2"></i> 📅 Schedule Event</span>
+                            <i class="bi bi-chevron-right small opacity-50"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

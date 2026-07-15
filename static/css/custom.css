@@ -1,0 +1,427 @@
+/* --- TickIt Planner Custom CSS Design System v2.0 --- */
+
+:root {
+    /* Color Palette */
+    --color-primary: #2563eb;
+    --color-primary-hover: #1d4ed8;
+    --color-accent: #38bdf8;
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-danger: #ef4444;
+    --color-dark: #111827;
+    --color-gray: #6b7280;
+    --color-bg: #f8fafc;
+    --color-card: #ffffff;
+    --color-border: #e5e7eb;
+
+    /* Shadows */
+    --shadow-soft: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+    --shadow-hover: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    
+    /* Easing */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Global Overrides */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-dark);
+    letter-spacing: -0.011em;
+    overflow-x: hidden;
+}
+
+/* Reusable Components Styling */
+
+/* Premium Cards - Notion / Linear Style */
+.card-premium {
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border) !important;
+    border-radius: 16px !important;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+}
+
+.card-premium:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Glassmorphism Classes */
+.glass-premium {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+}
+
+.glass-dark {
+    background: rgba(17, 24, 39, 0.85) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Buttons - Curves and Hover */
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover)) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 0.65rem 1.6rem;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.35);
+}
+
+.btn-outline-secondary {
+    border-radius: 12px !important;
+    padding: 0.65rem 1.6rem;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+}
+
+.btn-outline-secondary:hover {
+    transform: translateY(-2px);
+}
+
+/* Inputs - Rounded & Shadow */
+.form-control, .form-select {
+    border-radius: 10px !important;
+    border: 1px solid var(--color-border) !important;
+    padding: 0.7rem 1.1rem;
+    font-size: 0.95rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--color-primary) !important;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12) !important;
+    outline: none;
+}
+
+/* Badges */
+.badge-pill {
+    border-radius: 999px !important;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 0.4rem 0.8rem;
+}
+
+/* Text Gradient Effect */
+.text-gradient-primary {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--color-accent), var(--color-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+/* Priority Card Highlights */
+.border-priority-high {
+    border-left: 6px solid var(--color-danger) !important;
+}
+
+.border-priority-medium {
+    border-left: 6px solid var(--color-warning) !important;
+}
+
+.border-priority-low {
+    border-left: 6px solid var(--color-success) !important;
+}
+
+/* Hero Section Custom Styling */
+.hero-bg {
+    background: linear-gradient(135deg, #0f172a, #020617);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Terminal Mockup UI styling */
+.max-width-card {
+    max-width: 500px;
+    background-color: #1e293b !important;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.terminal-body {
+    background-color: #0b0f19;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Hover lift effect utility */
+.hover-lift {
+    transition: var(--transition-smooth);
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+}
+
+/* Custom Progress bar styling */
+.progress-bar-custom {
+    height: 8px;
+    border-radius: 999px;
+    background-color: var(--color-success);
+    transition: width 0.6s ease;
+}
+
+.progress-container-custom {
+    background-color: var(--color-border);
+    border-radius: 999px;
+    height: 8px;
+    overflow: hidden;
+}
+
+/* Custom Navbar links active state highlighting */
+.nav-link-custom {
+    font-weight: 500;
+    transition: color 0.25s ease;
+}
+
+.nav-link-custom:hover {
+    color: var(--color-accent) !important;
+}
+
+.text-primary-custom {
+    color: var(--color-accent) !important;
+}
+
+/* Split content card header icons spacing */
+.header-icon {
+    font-size: 1.25rem;
+    vertical-align: middle;
+}
+
+/* FAQ cards style */
+.faq-card {
+    border-radius: 12px !important;
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    transition: var(--transition-smooth);
+}
+
+.faq-card:hover {
+    border-color: var(--color-primary);
+}
+
+/* Tech stacks icon grid styles */
+.tech-icon-card {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+
+.tech-icon-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-primary);
+    background: #ffffff;
+}
+
+/* Roadmap styles */
+.timeline-card {
+    border-left: 3px solid var(--color-primary);
+    padding-left: 1.5rem;
+    margin-left: 0.5rem;
+    position: relative;
+}
+
+.timeline-dot {
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    position: absolute;
+    left: -8px;
+    top: 5px;
+}
+
+/* --- Dark Mode & Left Sidebar Extensions v2.0 --- */
+
+/* Dark Mode Theme Variables & Class Overrides */
+body.dark-mode {
+    --color-bg: #090d16;
+    --color-card: #111827;
+    --color-border: #1f2937;
+    --color-dark: #f9fafb;
+    --color-gray: #9ca3af;
+    background-color: var(--color-bg) !important;
+    color: var(--color-dark) !important;
+}
+
+body.dark-mode .card-premium {
+    background-color: var(--color-card) !important;
+    border: 1px solid var(--color-border) !important;
+}
+
+body.dark-mode .bg-light, 
+body.dark-mode .bg-white {
+    background-color: var(--color-card) !important;
+}
+
+body.dark-mode .text-dark {
+    color: var(--color-dark) !important;
+}
+
+body.dark-mode .text-muted {
+    color: var(--color-gray) !important;
+}
+
+body.dark-mode .btn-outline-secondary {
+    border-color: var(--color-border) !important;
+    color: var(--color-dark) !important;
+}
+
+body.dark-mode .btn-outline-secondary:hover {
+    background-color: var(--color-border) !important;
+}
+
+body.dark-mode .form-control, 
+body.dark-mode .form-select {
+    background-color: #0b0f19 !important;
+    border-color: var(--color-border) !important;
+    color: var(--color-dark) !important;
+}
+
+body.dark-mode .glass-premium {
+    background: rgba(22, 29, 48, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+body.dark-mode .modal-content {
+    background-color: var(--color-card) !important;
+    border-color: var(--color-border) !important;
+    color: var(--color-dark) !important;
+}
+
+/* Collapsible Left Sidebar Layout */
+#wrapper {
+    display: flex;
+    width: 100%;
+}
+
+#sidebar-wrapper {
+    min-height: 100vh;
+    width: 260px;
+    margin-left: 0;
+    transition: margin 0.25s cubic-bezier(0.4, 0, 0.2, 1), width 0.25s ease-out;
+    z-index: 1000;
+}
+
+/* When collapsed (toggled) on desktop */
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: -260px;
+}
+
+/* When collapsed (toggled) on mobile/tablet */
+@media (max-width: 991.98px) {
+    #sidebar-wrapper {
+        margin-left: -260px;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: 0;
+    }
+}
+
+/* Sidebar Links */
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    color: #9ca3af;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 12px;
+    margin: 0.25rem 1rem;
+    transition: var(--transition-smooth);
+}
+
+.sidebar-link:hover, 
+.sidebar-link.active {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-link.active {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover)) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+body.dark-mode .sidebar-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .sidebar-link.active {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover)) !important;
+}
+
+/* Ambient Dashboard Background glow */
+.dashboard-glow-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-bg-glow {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.06) 0%, rgba(37, 99, 235, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+body.dark-mode .dashboard-bg-glow {
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.05) 0%, rgba(56, 189, 248, 0) 70%);
+}
