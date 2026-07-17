@@ -9,7 +9,7 @@ from .models import Task, Event
 # Existing Landing Views
 def home(request):
     """
-    Renders the TickIt Planner Homepage.
+    Renders the PlanPilot Homepage.
     If the user is already authenticated, redirect them to the dashboard.
     """
     if request.user.is_authenticated:
@@ -18,13 +18,13 @@ def home(request):
 
 def about(request):
     """
-    Renders the About Page for TickIt Planner.
+    Renders the About Page for PlanPilot.
     """
     return render(request, 'planner/about.html')
 
 def contact(request):
     """
-    Renders the Contact Page for TickIt Planner.
+    Renders the Contact Page for PlanPilot.
     """
     return render(request, 'planner/contact.html')
 
@@ -191,3 +191,30 @@ def event_delete(request):
         event = get_object_or_404(Event, id=event_id, user=request.user)
         event.delete()
     return redirect('planner:events_list')
+
+@login_required
+def calendar_view(request):
+    """
+    Renders the Calendar View displaying the user's scheduled events.
+    """
+    import json
+    events = Event.objects.filter(user=request.user)
+    events_data = []
+    for event in events:
+        start_datetime = f"{event.date.isoformat()}T{event.start_time.isoformat()}"
+        end_datetime = f"{event.date.isoformat()}T{event.end_time.isoformat()}"
+        events_data.append({
+            'id': event.id,
+            'title': event.title,
+            'start': start_datetime,
+            'end': end_datetime,
+            'description': event.description,
+            'location': event.location,
+            'start_time': event.start_time.strftime("%I:%M %p"),
+            'end_time': event.end_time.strftime("%I:%M %p"),
+            'date': event.date.strftime("%B %d, %Y"),
+        })
+    context = {
+        'events_json': json.dumps(events_data)
+    }
+    return render(request, 'planner/calendar.html', context)

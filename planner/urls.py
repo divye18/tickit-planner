@@ -25,4 +25,7 @@ urlpatterns = [
     path('events/', views.events_list, name='events_list'),
     path('events/add/', views.event_add, name='event_add'),
     path('events/delete/', views.event_delete, name='event_delete'),
+    
+    # Calendar module route
+    path('calendar/', views.calendar_view, name='calendar'),
 ]

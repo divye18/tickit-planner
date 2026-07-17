@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block title %}Calendar - PlanPilot{% endblock %}
+
+{% block content %}
+<div class="container animate-fade-in">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+        <div>
+            <span class="badge bg-primary px-3 py-1.5 rounded-pill mb-2 fw-bold tracking-wide">MODULE</span>
+            <h1 class="fw-extrabold text-dark mb-0">Event Calendar</h1>
+        </div>
+        <a href="{% url 'planner:event_add' %}" class="btn btn-primary text-white rounded-3">
+            <i class="bi bi-calendar-plus me-1.5"></i> Schedule Event
+        </a>
+    </div>
+
+    <!-- Calendar Card Container -->
+    <div class="card card-premium p-4 bg-white shadow-sm">
+        <div id="calendar"></div>
+    </div>
+</div>
+
+<!-- Event Detail Modal -->
+<div class="modal fade" id="eventDetailModal" tabindex="-1" aria-labelledby="eventDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow rounded-4 border-0">
+            <div class="modal-header border-bottom pb-2 bg-light-subtle">
+                <h5 class="modal-title fw-bold text-dark" id="eventDetailModalLabel">
+                    <i class="bi bi-calendar-event text-primary me-2"></i>Event Details
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <h4 id="eventTitle" class="fw-extrabold text-primary mb-3"></h4>
+                <div class="d-flex flex-column gap-2 mb-3">
+                    <div class="d-flex align-items-center gap-2 text-secondary">
+                        <i class="bi bi-calendar3 text-secondary"></i>
+                        <span id="eventDate"></span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 text-secondary">
+                        <i class="bi bi-clock text-secondary"></i>
+                        <span id="eventTime"></span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 text-secondary">
+                        <i class="bi bi-geo-alt text-danger"></i>
+                        <span id="eventLocation" class="fw-medium text-dark"></span>
+                    </div>
+                </div>
+                <div class="border-top pt-3">
+                    <h6 class="fw-bold text-dark mb-1">Description</h6>
+                    <p id="eventDescription" class="text-muted small mb-0"></p>
+                </div>
+            </div>
+            <div class="modal-footer border-top bg-light-subtle d-flex justify-content-between">
+                <form id="deleteEventForm" method="POST" action="{% url 'planner:event_delete' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="event_id" id="deleteEventId">
+                    <button type="submit" class="btn btn-outline-danger btn-sm rounded-3">
+                        <i class="bi bi-trash me-1"></i> Delete
+                    </button>
+                </form>
+                <button type="button" class="btn btn-secondary btn-sm rounded-3 px-3" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FullCalendar CDN libraries -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.18/index.global.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const calendarEl = document.getElementById('calendar');
+        
+        // Retrieve and parse events list JSON
+        const eventsData = JSON.parse('{{ events_json|safe }}');
+        
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            themeSystem: 'standard',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,listMonth'
+            },
+            buttonText: {
+                today: 'Today',
+                month: 'Month',
+                week: 'Week',
+                list: 'Agenda'
+            },
+            height: 'auto',
+            events: eventsData,
+            eventClick: function(info) {
+                const event = info.event;
+                const extProps = event.extendedProps;
+                
+                // Populate Modal content
+                document.getElementById('eventTitle').textContent = event.title;
+                document.getElementById('eventDate').textContent = extProps.date;
+                document.getElementById('eventTime').textContent = extProps.start_time + ' - ' + extProps.end_time;
+                document.getElementById('eventLocation').textContent = extProps.location || 'No Location Logged';
+                document.getElementById('eventDescription').textContent = extProps.description || 'No description provided.';
+                
+                // Set hidden delete input
+                document.getElementById('deleteEventId').value = event.id;
+                
+                // Open Bootstrap Modal
+                const modal = new bootstrap.Modal(document.getElementById('eventDetailModal'));
+                modal.show();
+            }
+        });
+        
+        calendar.render();
+    });
+</script>
+
+<style>
+    /* FullCalendar styling overrides to fit modern SaaS theme */
+    .fc {
+        font-family: 'Inter', sans-serif;
+    }
+    .fc-theme-standard th {
+        background-color: var(--color-bg);
+        border: 1px solid var(--color-border);
+        color: var(--color-dark);
+        font-weight: 600;
+        padding: 0.75rem 0;
+    }
+    .fc-theme-standard td {
+        border: 1px solid var(--color-border);
+    }
+    .fc .fc-toolbar-title {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: var(--color-dark);
+    }
+    .fc .fc-button-primary {
+        background-color: var(--color-primary) !important;
+        border-color: var(--color-primary) !important;
+        border-radius: 8px !important;
+        font-weight: 600;
+        font-size: 0.85rem;
+        transition: var(--transition-smooth);
+    }
+    .fc .fc-button-primary:hover {
+        background-color: var(--color-primary-hover) !important;
+        border-color: var(--color-primary-hover) !important;
+        transform: translateY(-1px);
+    }
+    .fc .fc-button-primary:disabled {
+        background-color: var(--color-gray) !important;
+        border-color: var(--color-gray) !important;
+        opacity: 0.6;
+    }
+    .fc-event {
+        background-color: var(--color-primary) !important;
+        border: none !important;
+        border-radius: 6px !important;
+        padding: 2px 6px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: #ffffff !important;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+    }
+    .fc-event:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+    }
+    .fc-daygrid-day-number {
+        color: var(--color-dark) !important;
+        font-weight: 500;
+        text-decoration: none !important;
+    }
+    body.dark-mode .fc-theme-standard td, 
+    body.dark-mode .fc-theme-standard th {
+        border-color: var(--color-border) !important;
+    }
+    body.dark-mode .fc-day-today {
+        background-color: rgba(37, 99, 235, 0.08) !important;
+    }
+</style>
+{% endblock %}
